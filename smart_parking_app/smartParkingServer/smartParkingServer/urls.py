@@ -15,9 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from .views import getUsers
+from .views import getUsers, getParkings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('getuser/', getUsers)
+    path('getuser/', getUsers),
+    path('getparking/',getParkings)
 ]
