@@ -18,7 +18,7 @@ class Parkin_lot(models.Model):
     name = models.CharField(max_length=100)
     address = models.CharField(max_length=150)
     capacity = models.IntegerField()
-    actualparkedcars = models.IntegerField()
+    actualparkedcars = models.IntegerField(default=0)
     town = models.ForeignKey(Town, on_delete=models.CASCADE)
 
 
