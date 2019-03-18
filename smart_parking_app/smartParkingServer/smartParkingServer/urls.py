@@ -19,14 +19,11 @@ from .views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('getuser/', getUsers),
-    path('getparking/', getParkings),
-    path('addparking/', addParkingLot),
-    path('deleteparking/<int:pk>', deleteParkingLot),
+    path('getusers/', getUsers),
     path('registeruser/', registerUser),
     path('loginuser/', loginUser),
     path('searchparking/<str:searchText>', searchParkingLot),
-    path('parkingdetails/<int:pk>', getParkingDetails),
-    path('parkinglot/<int:pk>', updateParkedCars),
-    path('favouriteparkinglot/<int:id>', favouriteParking)
+    path('favouriteparkinglot/<int:id>', favouriteParking),
+    path('parkinglot/<int:id>', parkingLotId),
+    path('parkinglot/', parkingLot)
 ]
