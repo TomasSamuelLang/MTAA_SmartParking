@@ -1,8 +1,13 @@
+from django.contrib.auth import authenticate
 from django.db.models import Q
+from pytz import unicode
 from rest_framework import status
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from .serializers import *
 from rest_framework.response import Response
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
+from django.contrib.auth.hashers import make_password, check_password
 
 
 @api_view(['get', 'put', 'delete'])
@@ -51,10 +56,14 @@ def getUsers(request):
 
 @api_view(['post'])
 def registerUser(request):
-    serializer = UserSerializer(data=request.data)
+
+    password = make_password(request.data.get('password'))
+    user = {"login": request.data.get('login'), "password": password}
+
+    serializer = UserSerializer(data=user)
 
     try:
-        login = User.objects.get(login=request.data.get('login'))
+        User.objects.get(login=request.data.get('login'))
     except User.DoesNotExist:
         if serializer.is_valid():
             serializer.save()
@@ -64,15 +73,39 @@ def registerUser(request):
 
 
 @api_view(['post'])
+@authentication_classes((SessionAuthentication, BasicAuthentication))
+@permission_classes((IsAuthenticated,))
+def loginUserSuper(request):
+
+    login = request.data.get("login")
+    password = request.data.get("password")
+
+    user2 = authenticate(username=login, password=password)
+
+    if not user2:
+        return Response({'error': 'Invalid Credentials'},
+                        status=status.HTTP_404_NOT_FOUND)
+
+    token, _ = Token.objects.get_or_create(user=user2)
+
+    return Response(status=status.HTTP_200_OK)
+
+@api_view(['post'])
+@authentication_classes((SessionAuthentication, BasicAuthentication))
+@permission_classes((IsAuthenticated,))
 def loginUser(request):
+
     try:
-        user = User.objects.get(login=request.data.get('login'), password=request.data.get('password'))
+        user = User.objects.get(login=request.data.get('login'))
     except User.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    serializer = UserSerializer(user)
-    return Response(serializer.data.get('id'),status=status.HTTP_200_OK)
+    if check_password(request.data.get('password'), user.password):
 
+        serializer = UserSerializer(user)
+
+        return Response(serializer.data.get('id'), status=status.HTTP_200_OK)
+    return Response(status=status.HTTP_404_NOT_FOUND)
 
 @api_view(['get'])
 def searchParkingLot(request, searchText):
