@@ -8,7 +8,28 @@ from rest_framework.response import Response
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.hashers import make_password, check_password
+from rest_framework.parsers import FileUploadParser
+from rest_framework.exceptions import ParseError
 
+
+@api_view(['post'])
+def postPhoto(request):
+    parser_class = (FileUploadParser,)
+
+    if 'file' not in request.data:
+        raise ParseError("Empty content")
+
+    return
+
+@api_view(['get'])
+def get_photo(request, id):
+
+    photo = Photo.objects.get(parkinglot=id)
+
+    serializer = PhotoSerializer(photo)
+
+    return Response(serializer.data, status=status.HTTP_200_OK)
+    # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['get', 'put', 'delete'])
 def parkingLotId(request, id):
@@ -54,6 +75,20 @@ def getUsers(request):
     return Response(serializer.data)
 
 
+@api_view(['post', 'get'])
+def getTownId(request):
+
+    if request.method == 'POST':
+        try:
+            town = Town.objects.get(name=request.data.get('name'))
+        except town is None:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+
+        serializer = TownSerializer(town);
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    return Response(status=status.HTTP_409_CONFLICT)
+
+
 @api_view(['post'])
 def registerUser(request):
 
@@ -69,12 +104,12 @@ def registerUser(request):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    return Response(status=status.HTTP_409_CONFLICT)
+    return Response(serializer.errors, status=status.HTTP_409_CONFLICT)
 
 
 @api_view(['post'])
-@authentication_classes((SessionAuthentication, BasicAuthentication))
-@permission_classes((IsAuthenticated,))
+# @authentication_classes((SessionAuthentication, BasicAuthentication))
+# @permission_classes((IsAuthenticated,))
 def loginUserSuper(request):
 
     login = request.data.get("login")
@@ -91,8 +126,6 @@ def loginUserSuper(request):
     return Response(status=status.HTTP_200_OK)
 
 @api_view(['post'])
-@authentication_classes((SessionAuthentication, BasicAuthentication))
-@permission_classes((IsAuthenticated,))
 def loginUser(request):
 
     try:

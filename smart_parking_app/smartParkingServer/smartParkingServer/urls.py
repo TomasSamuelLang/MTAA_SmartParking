@@ -30,4 +30,6 @@ urlpatterns = [
     path('favouriteparkinglot/<int:id>', favouriteParking),
     path('parkinglot/<int:id>', parkingLotId),
     path('parkinglot/', parkingLot),
+    path('gettownid/', getTownId),
+    path('getphoto/<int:id>', get_photo),
 ]
