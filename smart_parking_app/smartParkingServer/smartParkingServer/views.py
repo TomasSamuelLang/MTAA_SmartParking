@@ -6,10 +6,13 @@ from rest_framework.decorators import api_view, authentication_classes, permissi
 from .serializers import *
 from rest_framework.response import Response
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from django.contrib.auth.hashers import make_password, check_password
 from rest_framework.parsers import FileUploadParser
 from rest_framework.exceptions import ParseError
+from django.contrib.auth import authenticate, login, logout
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.authtoken.models import Token
 
 
 @api_view(['post'])
@@ -90,55 +93,41 @@ def getTownId(request):
 
 
 @api_view(['post'])
+@permission_classes((AllowAny,))
 def registerUser(request):
 
     password = make_password(request.data.get('password'))
-    user = {"login": request.data.get('login'), "password": password}
+    user = {"username": request.data.get('username'), "password": password}
 
     serializer = UserSerializer(data=user)
 
-    try:
-        User.objects.get(login=request.data.get('login'))
-    except User.DoesNotExist:
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    return Response(serializer.errors, status=status.HTTP_409_CONFLICT)
+    if serializer.is_valid():
+        user = serializer.save()
+        if user:
+            token = Token.objects.create(user=user)
+            json = serializer.data
+            json['token'] = token.key
+            return Response(json, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['post'])
-# @authentication_classes((SessionAuthentication, BasicAuthentication))
-# @permission_classes((IsAuthenticated,))
-def loginUserSuper(request):
-
-    login = request.data.get("login")
+@csrf_exempt
+@api_view(["POST"])
+@permission_classes((AllowAny,))
+def loginUser(request):
+    username = request.data.get("username")
     password = request.data.get("password")
-
-    user2 = authenticate(username=login, password=password)
-
-    if not user2:
+    if username is None or password is None:
+        return Response({'error': 'Please provide both username and password'},
+                        status=status.HTTP_400_BAD_REQUEST)
+    user = authenticate(username=username, password=password)
+    if not user:
         return Response({'error': 'Invalid Credentials'},
                         status=status.HTTP_404_NOT_FOUND)
+    token, _ = Token.objects.get_or_create(user=user)
+    return Response({'token': token.key},
+                    status=status.HTTP_200_OK)
 
-    token, _ = Token.objects.get_or_create(user=user2)
-
-    return Response(status=status.HTTP_200_OK)
-
-@api_view(['post'])
-def loginUser(request):
-
-    try:
-        user = User.objects.get(login=request.data.get('login'))
-    except User.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
-
-    if check_password(request.data.get('password'), user.password):
-
-        serializer = UserSerializer(user)
-
-        return Response(serializer.data.get('id'), status=status.HTTP_200_OK)
-    return Response(status=status.HTTP_404_NOT_FOUND)
 
 @api_view(['get'])
 def searchParkingLot(request, searchText):

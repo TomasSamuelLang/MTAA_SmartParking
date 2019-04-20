@@ -1,11 +1,14 @@
 from rest_framework.serializers import ModelSerializer
 from .models import *
+from django.contrib.auth import models as authmodels
 
 
 class UserSerializer(ModelSerializer):
     class Meta:
-        model = User
-        fields = '__all__'
+        model = authmodels.User
+        fields = ('id', 'username', 'password')
+        write_only_fields = ('password',)
+        read_only_fields = ('id',)
 
 
 class ParkingLotSerializer(ModelSerializer):

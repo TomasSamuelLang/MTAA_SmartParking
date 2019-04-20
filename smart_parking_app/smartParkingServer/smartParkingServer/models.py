@@ -1,13 +1,5 @@
 from django.db import models
-from django.conf import settings
-from django.db.models.signals import post_save
-from django.dispatch import receiver
-from rest_framework.authtoken.models import Token
-
-# @receiver(post_save, sender=settings.AUTH_USER_MODEL)
-# def create_auth_token(sender, instance=None, created=False, **kwargs):
-#     if created:
-#         Token.objects.create(user=instance)
+from django.contrib.auth import models as authmodels
 
 
 class User(models.Model):
@@ -38,7 +30,7 @@ class Photo(models.Model):
 
 
 class Favourite_parking_lot(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(authmodels.User, on_delete=models.CASCADE)
     parkinglot = models.ForeignKey(Parkin_lot, on_delete=models.CASCADE)
 
 

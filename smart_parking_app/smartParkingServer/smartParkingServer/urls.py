@@ -17,11 +17,11 @@ from django.contrib import admin
 from django.conf.urls import include
 from django.urls import path
 from .views import *
-from rest_framework.authtoken import views
+from rest_framework.authtoken.views import obtain_auth_token
 
 
 urlpatterns = [
-    path('authenticate/', loginUserSuper),
+    # path('authenticate/', loginUserSuper),
     path('admin/', admin.site.urls),
     path('getusers/', getUsers),
     path('registeruser/', registerUser),
@@ -32,4 +32,6 @@ urlpatterns = [
     path('parkinglot/', parkingLot),
     path('gettownid/', getTownId),
     path('getphoto/<int:id>', get_photo),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('api-token-auth/', obtain_auth_token, name='api_token_auth'),
 ]

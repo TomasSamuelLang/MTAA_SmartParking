@@ -4,6 +4,7 @@
     <list default="true" id="25b50cc8-ef1f-4c2f-973c-18ec125166e4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/smartParkingServer/smartParkingServer/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/smartParkingServer/smartParkingServer/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smartParkingServer/smartParkingServer/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/smartParkingServer/smartParkingServer/serializers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/smartParkingServer/smartParkingServer/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/smartParkingServer/smartParkingServer/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/smartParkingServer/smartParkingServer/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/smartParkingServer/smartParkingServer/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/smartParkingServer/smartParkingServer/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/smartParkingServer/smartParkingServer/views.py" afterDir="false" />
@@ -19,8 +20,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/smartParkingServer/smartParkingServer/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1441">
-              <caret line="99" selection-start-line="99" selection-end-line="99" />
+            <state relative-caret-position="113">
+              <caret line="50" column="1" selection-start-line="50" selection-start-column="1" selection-end-line="50" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -28,11 +29,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/smartParkingServer/smartParkingServer/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" column="46" selection-start-line="14" selection-start-column="46" selection-end-line="14" selection-end-column="46" />
-              <folding>
-                <element signature="e#0#28#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="15">
+              <caret line="1" selection-start-line="1" selection-end-line="1" selection-end-column="52" />
             </state>
           </provider>
         </entry>
@@ -40,8 +38,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/smartParkingServer/smartParkingServer/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="23" column="40" lean-forward="true" selection-start-line="23" selection-start-column="40" selection-end-line="23" selection-end-column="40" />
+            <state relative-caret-position="360">
+              <caret line="24" column="36" lean-forward="true" selection-start-line="24" selection-start-column="36" selection-end-line="24" selection-end-column="36" />
               <folding>
                 <element signature="e#642#674#0" expanded="true" />
               </folding>
@@ -52,8 +50,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/smartParkingServer/smartParkingServer/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-46">
-              <caret line="102" column="67" lean-forward="true" selection-start-line="102" selection-start-column="67" selection-end-line="102" selection-end-column="67" />
+            <state relative-caret-position="382">
+              <caret line="98" column="4" selection-start-line="98" selection-start-column="4" selection-end-line="98" selection-end-column="4" />
               <folding>
                 <element signature="e#0#44#0" expanded="true" />
               </folding>
@@ -64,8 +62,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/smartParkingServer/smartParkingServer/serializers.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="720">
-              <caret line="49" column="26" selection-start-line="49" selection-start-column="26" selection-end-line="49" selection-end-column="26" />
+            <state relative-caret-position="135">
+              <caret line="10" selection-start-line="10" selection-end-line="10" />
               <folding>
                 <element signature="e#0#54#0" expanded="true" />
               </folding>
@@ -88,10 +86,10 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/smartParkingServer/smartParkingServer/serializers.py" />
-        <option value="$PROJECT_DIR$/smartParkingServer/smartParkingServer/settings.py" />
-        <option value="$PROJECT_DIR$/smartParkingServer/smartParkingServer/urls.py" />
         <option value="$PROJECT_DIR$/smartParkingServer/smartParkingServer/models.py" />
+        <option value="$PROJECT_DIR$/smartParkingServer/smartParkingServer/urls.py" />
+        <option value="$PROJECT_DIR$/smartParkingServer/smartParkingServer/settings.py" />
+        <option value="$PROJECT_DIR$/smartParkingServer/smartParkingServer/serializers.py" />
         <option value="$PROJECT_DIR$/smartParkingServer/smartParkingServer/views.py" />
       </list>
     </option>
@@ -168,18 +166,32 @@
       <workItem from="1552986191675" duration="368000" />
       <workItem from="1553020664946" duration="1802000" />
       <workItem from="1553029662760" duration="4418000" />
-      <workItem from="1553078235837" duration="3932000" />
+      <workItem from="1553078235837" duration="4686000" />
+      <workItem from="1553200225547" duration="1626000" />
+      <workItem from="1553800628099" duration="7000" />
+      <workItem from="1553801398992" duration="614000" />
+      <workItem from="1554057707353" duration="95000" />
+      <workItem from="1554057827553" duration="3000" />
+      <workItem from="1554066346857" duration="1938000" />
+      <workItem from="1554138758421" duration="159000" />
+      <workItem from="1554192159084" duration="1556000" />
+      <workItem from="1554282310636" duration="4759000" />
+      <workItem from="1554298450586" duration="399000" />
+      <workItem from="1554542604804" duration="1299000" />
+      <workItem from="1554544195230" duration="234000" />
+      <workItem from="1555179280567" duration="616000" />
+      <workItem from="1555744310049" duration="5048000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="35552000" />
+    <option name="totallyTimeSpent" value="54659000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1680" height="963" extended-state="6" />
+    <frame x="0" y="23" width="1680" height="963" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21794872" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25518927" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -221,16 +233,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/smartParkingServer/smartParkingServer/serializers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
-          <caret line="49" column="26" selection-start-line="49" selection-start-column="26" selection-end-line="49" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#54#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/python3.7/site-packages/django/contrib/auth/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="46">
@@ -240,35 +242,42 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/smartParkingServer/smartParkingServer/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1441">
-          <caret line="99" selection-start-line="99" selection-end-line="99" />
+        <state relative-caret-position="113">
+          <caret line="50" column="1" selection-start-line="50" selection-start-column="1" selection-end-line="50" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/smartParkingServer/smartParkingServer/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" selection-start-line="1" selection-end-line="1" selection-end-column="52" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/smartParkingServer/smartParkingServer/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="40" lean-forward="true" selection-start-line="23" selection-start-column="40" selection-end-line="23" selection-end-column="40" />
+        <state relative-caret-position="360">
+          <caret line="24" column="36" lean-forward="true" selection-start-line="24" selection-start-column="36" selection-end-line="24" selection-end-column="36" />
           <folding>
             <element signature="e#642#674#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/smartParkingServer/smartParkingServer/models.py">
+    <entry file="file://$PROJECT_DIR$/smartParkingServer/smartParkingServer/serializers.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="46" selection-start-line="14" selection-start-column="46" selection-end-line="14" selection-end-column="46" />
+        <state relative-caret-position="135">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
           <folding>
-            <element signature="e#0#28#0" expanded="true" />
+            <element signature="e#0#54#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/smartParkingServer/smartParkingServer/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-46">
-          <caret line="102" column="67" lean-forward="true" selection-start-line="102" selection-start-column="67" selection-end-line="102" selection-end-column="67" />
+        <state relative-caret-position="382">
+          <caret line="98" column="4" selection-start-line="98" selection-start-column="4" selection-end-line="98" selection-end-column="4" />
           <folding>
             <element signature="e#0#44#0" expanded="true" />
           </folding>
