@@ -18,7 +18,8 @@ from django.conf.urls import include
 from django.urls import path
 from .views import *
 from rest_framework.authtoken.views import obtain_auth_token
-
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     # path('authenticate/', loginUserSuper),
@@ -34,4 +35,8 @@ urlpatterns = [
     path('getphoto/<int:id>', get_photo),
     path('accounts/', include('django.contrib.auth.urls')),
     path('api-token-auth/', obtain_auth_token, name='api_token_auth'),
+    path('uploadphoto/', postPhoto)
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

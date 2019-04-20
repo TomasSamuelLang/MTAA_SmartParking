@@ -16,25 +16,30 @@ from rest_framework.authtoken.models import Token
 
 
 @api_view(['post'])
+@permission_classes((AllowAny,))
 def postPhoto(request):
-    parser_class = (FileUploadParser,)
+    serializer = PhotoSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    else:
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    if 'file' not in request.data:
-        raise ParseError("Empty content")
-
-    return
 
 @api_view(['get'])
+@permission_classes((AllowAny,))
 def get_photo(request, id):
 
-    photo = Photo.objects.get(parkinglot=id)
-
-    serializer = PhotoSerializer(photo)
-
-    return Response(serializer.data, status=status.HTTP_200_OK)
+    photo = Photo.objects.filter(parkinglot=id)
+    if photo is not None:
+        serializer = PhotoSerializer(photo, many=True)
+        json = serializer.data
+        return Response(json, status=status.HTTP_200_OK)
     # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 @api_view(['get', 'put', 'delete'])
+@permission_classes((AllowAny,))
 def parkingLotId(request, id):
     try:
         parking = Parkin_lot.objects.get(pk=id)
@@ -58,6 +63,7 @@ def parkingLotId(request, id):
 
 
 @api_view(['get', 'post'])
+@permission_classes((AllowAny,))
 def parkingLot(request):
     if request.method == 'GET':
         parkings = Parkin_lot.objects.all()
@@ -72,6 +78,7 @@ def parkingLot(request):
 
 
 @api_view(['get'])
+@permission_classes((AllowAny,))
 def getUsers(request):
     users = User.objects.all()
     serializer = UserSerializer(users, many=True)
@@ -79,6 +86,7 @@ def getUsers(request):
 
 
 @api_view(['post', 'get'])
+@permission_classes((AllowAny,))
 def getTownId(request):
 
     if request.method == 'POST':
@@ -130,6 +138,7 @@ def loginUser(request):
 
 
 @api_view(['get'])
+@permission_classes((AllowAny,))
 def searchParkingLot(request, searchText):
     try:
         parking = Parkin_lot.objects.filter(Q(name=searchText) | Q(address=searchText))
@@ -141,6 +150,7 @@ def searchParkingLot(request, searchText):
 
 
 @api_view(['get', 'post', 'delete'])
+@permission_classes((AllowAny,))
 def favouriteParking(request, id):
 
     if request.method == 'DELETE':

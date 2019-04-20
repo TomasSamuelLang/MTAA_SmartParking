@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth import models as authmodels
 
-
 class User(models.Model):
     login = models.CharField(max_length=50)
     password = models.CharField(max_length=100)
@@ -25,8 +24,9 @@ class Parkin_lot(models.Model):
 
 
 class Photo(models.Model):
-    photo = models.CharField(max_length=300)
+    photo = models.CharField(max_length=255)
     parkinglot = models.ForeignKey(Parkin_lot, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='media/', null=True, max_length=255)
 
 
 class Favourite_parking_lot(models.Model):
