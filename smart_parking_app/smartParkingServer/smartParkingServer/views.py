@@ -30,11 +30,11 @@ def postPhoto(request):
 @permission_classes((AllowAny,))
 def get_photo(request, id):
 
-    photo = Photo.objects.filter(parkinglot=id)
+    photo = Photo.objects.get(parkinglot=id)
     if photo is not None:
-        serializer = PhotoSerializer(photo, many=True)
-        json = serializer.data
-        return Response(json, status=status.HTTP_200_OK)
+        serializer = PhotoSerializer(photo)
+        # json = serializer.data
+        return Response(serializer.data, status=status.HTTP_200_OK)
     # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
