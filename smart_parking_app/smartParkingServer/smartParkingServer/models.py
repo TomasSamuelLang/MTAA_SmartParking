@@ -26,7 +26,7 @@ class Parkin_lot(models.Model):
 class Photo(models.Model):
     photo = models.CharField(max_length=255)
     parkinglot = models.ForeignKey(Parkin_lot, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='media/', null=True, max_length=255)
+    image = models.ImageField(upload_to='media/', null=True, max_length=999)
 
 
 class Favourite_parking_lot(models.Model):
