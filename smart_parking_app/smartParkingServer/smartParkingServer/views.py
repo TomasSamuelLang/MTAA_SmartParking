@@ -13,6 +13,7 @@ from rest_framework.exceptions import ParseError
 from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.authtoken.models import Token
+from django.contrib.auth import models as authmodels
 
 
 @api_view(['post'])
@@ -132,8 +133,9 @@ def loginUser(request):
     if not user:
         return Response({'error': 'Invalid Credentials'},
                         status=status.HTTP_404_NOT_FOUND)
+    user = authmodels.User.objects.all().get(username=username)
     token, _ = Token.objects.get_or_create(user=user)
-    return Response({'token': token.key},
+    return Response({'token': token.key, 'id': user.id, "username": user.username},
                     status=status.HTTP_200_OK)
 
 
