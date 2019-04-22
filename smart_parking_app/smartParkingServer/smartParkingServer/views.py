@@ -16,27 +16,33 @@ from rest_framework.authtoken.models import Token
 from django.contrib.auth import models as authmodels
 
 
-@api_view(['post'])
+@api_view(['put'])
 @permission_classes((AllowAny,))
 def postPhoto(request):
-    serializer = PhotoSerializer(data=request.data)
-    if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-    else:
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    try:
+        photo = Photo.objects.get(parkinglot=request.data.get('parkinglot'))
+    except Photo.DoesNotExist:
+        serializer = PhotoSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    photo.image = request.data.get('image')
+    photo.save()
+    return Response(status=status.HTTP_201_CREATED)
 
 
 @api_view(['get'])
 @permission_classes((AllowAny,))
 def get_photo(request, id):
-
-    photo = Photo.objects.get(parkinglot=id)
-    if photo is not None:
-        serializer = PhotoSerializer(photo)
-        # json = serializer.data
-        return Response(serializer.data, status=status.HTTP_200_OK)
-    # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    try:
+        photo = Photo.objects.get(parkinglot=id)
+    except Photo.DoesNotExist:
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+    serializer = PhotoSerializer(photo)
+    return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 @api_view(['get', 'put', 'delete'])
@@ -86,17 +92,25 @@ def getUsers(request):
     return Response(serializer.data)
 
 
+@api_view(['get'])
+@permission_classes((AllowAny,))
+def getAllTowns(request):
+    towns = Town.objects.all()
+    serializer = TownSerializer(towns, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+
 @api_view(['post', 'get'])
 @permission_classes((AllowAny,))
 def getTownId(request):
 
     if request.method == 'POST':
         try:
-            town = Town.objects.get(name=request.data.get('name'))
-        except town is None:
+            result = Town.objects.all().get(name=request.data.get('name'))
+        except Town.DoesNotExist:
             return Response(status=status.HTTP_403_FORBIDDEN)
 
-        serializer = TownSerializer(town);
+        serializer = TownSerializer(result)
         return Response(serializer.data, status=status.HTTP_200_OK)
     return Response(status=status.HTTP_409_CONFLICT)
 

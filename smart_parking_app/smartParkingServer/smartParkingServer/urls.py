@@ -35,7 +35,8 @@ urlpatterns = [
     path('getphoto/<int:id>', get_photo),
     path('accounts/', include('django.contrib.auth.urls')),
     path('api-token-auth/', obtain_auth_token, name='api_token_auth'),
-    path('uploadphoto/', postPhoto)
+    path('uploadphoto/', postPhoto),
+    path('gettowns/', getAllTowns)
 ]
 
 if settings.DEBUG:
