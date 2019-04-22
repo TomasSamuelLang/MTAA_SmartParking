@@ -161,7 +161,6 @@ def searchParkingLot(request, searchText):
 
 
 @api_view(['get', 'post', 'delete'])
-@permission_classes((AllowAny,))
 def favouriteParking(request, id):
 
     if request.method == 'DELETE':
