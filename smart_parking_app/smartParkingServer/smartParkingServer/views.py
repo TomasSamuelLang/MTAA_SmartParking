@@ -17,7 +17,6 @@ from django.contrib.auth import models as authmodels
 
 
 @api_view(['put'])
-@permission_classes((AllowAny,))
 def postPhoto(request):
     try:
         photo = Photo.objects.get(parkinglot=request.data.get('parkinglot'))
@@ -35,7 +34,6 @@ def postPhoto(request):
 
 
 @api_view(['get'])
-@permission_classes((AllowAny,))
 def get_photo(request, id):
     try:
         photo = Photo.objects.get(parkinglot=id)
@@ -46,7 +44,6 @@ def get_photo(request, id):
 
 
 @api_view(['get', 'put', 'delete'])
-@permission_classes((AllowAny,))
 def parkingLotId(request, id):
     try:
         parking = Parkin_lot.objects.get(pk=id)
@@ -70,7 +67,6 @@ def parkingLotId(request, id):
 
 
 @api_view(['get', 'post'])
-@permission_classes((AllowAny,))
 def parkingLot(request):
     if request.method == 'GET':
         parkings = Parkin_lot.objects.all()
@@ -93,7 +89,6 @@ def getUsers(request):
 
 
 @api_view(['get'])
-@permission_classes((AllowAny,))
 def getAllTowns(request):
     towns = Town.objects.all()
     serializer = TownSerializer(towns, many=True)
